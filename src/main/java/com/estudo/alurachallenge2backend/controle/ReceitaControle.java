@@ -4,6 +4,7 @@ import com.estudo.alurachallenge2backend.dominio.entidade.Receita;
 import com.estudo.alurachallenge2backend.dominio.entidade.regras.ReceitaRepetidaNoMes;
 import com.estudo.alurachallenge2backend.dto.ReceitaDTOCadastro;
 import com.estudo.alurachallenge2backend.servico.ReceitaServico;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +25,7 @@ public class ReceitaControle {
 
     @PostMapping
     @Transactional
-    public ResponseEntity cadastrar(@RequestBody ReceitaDTOCadastro receita){
+    public ResponseEntity cadastrar(@RequestBody @Valid ReceitaDTOCadastro receita){
         receitaRepetidaNoMes.validar(receita);
         servico.salvar(new Receita(receita));
         return ResponseEntity.ok(receita);
