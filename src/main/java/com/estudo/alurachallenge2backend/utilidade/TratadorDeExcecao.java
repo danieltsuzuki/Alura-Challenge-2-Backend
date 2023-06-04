@@ -10,6 +10,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 import static java.util.Arrays.stream;
@@ -45,6 +46,18 @@ public class TratadorDeExcecao{
                 "Não foi possivel cadastrar a receita",
                 HttpStatus.BAD_REQUEST.value(),
                 mensagem.toString()
+        );
+
+        return ResponseEntity.badRequest().body(resposta);
+    }
+
+    @ExceptionHandler(DateTimeParseException.class)
+    public ResponseEntity resposta(DateTimeParseException erro){
+
+        Resposta resposta = new Resposta(
+                "Não foi possivel cadastrar a receita",
+                HttpStatus.BAD_REQUEST.value(),
+                "Data inválida!"
         );
 
         return ResponseEntity.badRequest().body(resposta);

@@ -3,15 +3,16 @@ package com.estudo.alurachallenge2backend.controle;
 import com.estudo.alurachallenge2backend.dominio.entidade.Receita;
 import com.estudo.alurachallenge2backend.dominio.entidade.regras.ReceitaRepetidaNoMes;
 import com.estudo.alurachallenge2backend.dto.ReceitaDTOCadastro;
+import com.estudo.alurachallenge2backend.dto.ReceitaDTODetalhes;
 import com.estudo.alurachallenge2backend.servico.ReceitaServico;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/receita")
@@ -29,6 +30,12 @@ public class ReceitaControle {
         receitaRepetidaNoMes.validar(receita);
         servico.salvar(new Receita(receita));
         return ResponseEntity.ok(receita);
+    }
+
+    @GetMapping
+    public ResponseEntity listar(){
+        List<ReceitaDTODetalhes> receitas = servico.buscarTodasReceitas().stream().map(receita -> new ReceitaDTODetalhes(receita)).collect(Collectors.toList());
+        return ResponseEntity.ok(receitas);
     }
 
 }
