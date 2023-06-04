@@ -7,7 +7,9 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Getter
-public class ReceitaDTODetalhes {
+public class ReceitaDTOListagem {
+
+    private Long id;
 
     private String descricao;
 
@@ -15,7 +17,8 @@ public class ReceitaDTODetalhes {
 
     private LocalDate data;
 
-    public ReceitaDTODetalhes(Receita receitas){
+    public ReceitaDTOListagem(Receita receitas){
+        this.id = receitas.getId();
         this.descricao = receitas.getDescricao();
         this.valor = receitas.getValor();
         this.data = receitas.getData();
