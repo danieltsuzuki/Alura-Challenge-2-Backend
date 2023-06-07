@@ -3,6 +3,7 @@ package com.estudo.alurachallenge2backend.controle;
 import com.estudo.alurachallenge2backend.dominio.entidade.Receita;
 import com.estudo.alurachallenge2backend.dominio.entidade.regras.ReceitaRepetidaNoMes;
 import com.estudo.alurachallenge2backend.dto.ReceitaDTOCadastro;
+import com.estudo.alurachallenge2backend.dto.ReceitaDTODetalhes;
 import com.estudo.alurachallenge2backend.dto.ReceitaDTOListagem;
 import com.estudo.alurachallenge2backend.servico.ReceitaServico;
 import jakarta.validation.Valid;
@@ -36,6 +37,12 @@ public class ReceitaControle {
     public ResponseEntity listar(){
         List<ReceitaDTOListagem> receitas = servico.buscarTodasReceitas().stream().map(receita -> new ReceitaDTOListagem(receita)).collect(Collectors.toList());
         return ResponseEntity.ok(receitas);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity pesquisar(@PathVariable Long id){
+        ReceitaDTODetalhes receita = new ReceitaDTODetalhes(servico.buscarPorId(id));
+        return ResponseEntity.ok(receita);
     }
 
 }
