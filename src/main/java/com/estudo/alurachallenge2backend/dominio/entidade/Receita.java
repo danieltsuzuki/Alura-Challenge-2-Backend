@@ -1,5 +1,6 @@
 package com.estudo.alurachallenge2backend.dominio.entidade;
 
+import com.estudo.alurachallenge2backend.dto.ReceitaDTOAtualizar;
 import com.estudo.alurachallenge2backend.dto.ReceitaDTOCadastro;
 import jakarta.persistence.*;
 import lombok.Getter;
