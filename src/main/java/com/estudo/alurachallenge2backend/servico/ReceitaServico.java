@@ -52,4 +52,9 @@ public class ReceitaServico {
         return repositorio.save(receitaAntiga);
     }
 
+    public void excluir(Long id){
+        var receita = buscarPorId(id);
+        repositorio.delete(receita);
+    }
+
 }
