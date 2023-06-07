@@ -1,6 +1,7 @@
 package com.estudo.alurachallenge2backend.utilidade;
 
 import com.estudo.alurachallenge2backend.dominio.entidade.excecao.ExcecaoDeValidacao;
+import com.estudo.alurachallenge2backend.servico.excecao.RecursoNaoEncontrado;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
@@ -61,6 +62,11 @@ public class TratadorDeExcecao{
         );
 
         return ResponseEntity.badRequest().body(resposta);
+    }
+
+    @ExceptionHandler(RecursoNaoEncontrado.class)
+    public ResponseEntity resposta(){
+        return ResponseEntity.notFound().build();
     }
 
 }
