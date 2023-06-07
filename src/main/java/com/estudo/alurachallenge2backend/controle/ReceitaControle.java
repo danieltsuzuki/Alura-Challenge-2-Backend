@@ -54,4 +54,10 @@ public class ReceitaControle {
         return ResponseEntity.ok(receitaNova);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity deletar(@PathVariable Long id){
+        servico.excluir(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }
