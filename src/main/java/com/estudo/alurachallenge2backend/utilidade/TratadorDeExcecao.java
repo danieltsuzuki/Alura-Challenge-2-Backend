@@ -21,7 +21,7 @@ public class TratadorDeExcecao{
 
     @ExceptionHandler(ExcecaoDeValidacao.class)
     public ResponseEntity resposta(ExcecaoDeValidacao erro){
-        Resposta resposta = new Resposta("Não foi possivel cadastrar a receita", HttpStatus.BAD_REQUEST.value(),erro.getMessage());
+        Resposta resposta = new Resposta(HttpStatus.BAD_REQUEST.value(),erro.getMessage());
         return ResponseEntity.badRequest().body(resposta);
     }
 
@@ -44,7 +44,6 @@ public class TratadorDeExcecao{
         }
 
         Resposta resposta = new Resposta(
-                "Não foi possivel cadastrar a receita",
                 HttpStatus.BAD_REQUEST.value(),
                 mensagem.toString()
         );
@@ -56,7 +55,6 @@ public class TratadorDeExcecao{
     public ResponseEntity resposta(DateTimeParseException erro){
 
         Resposta resposta = new Resposta(
-                "Não foi possivel cadastrar a receita",
                 HttpStatus.BAD_REQUEST.value(),
                 "Data inválida!"
         );
